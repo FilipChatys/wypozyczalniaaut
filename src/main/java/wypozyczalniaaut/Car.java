@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,18 +53,36 @@ public class Car {
 
         //TODO
         //do zrobienia implementacja która pozwoli na ograniczenie listy do składającej się z danej marki
+        List<Car> allCars = getCars();
+        List<Car> matchingCars = new ArrayList<>();
 
+        for (Car car : allCars) {
+            if (car.getMark().equalsIgnoreCase(mark)) {
+                matchingCars.add(car);
+            }
+        }
 
-
-        return Collections.emptyList();
+        return matchingCars;
     }
+
+        //return Collections.emptyList();
+    //}
 
     public static List<Car> getListOfCars(String mark, String model) {
 
         //TODO
         //do zrobienia implementacja która pozwoli na ograniczenie listy do składającej się z danej marki oraz modelu
 
-        return Collections.emptyList();
-    }
+        List<Car> filteredCars2 = new ArrayList<>();
 
+        for (Car car : getCars()) {
+            if (car.getMark().equals(mark) && car.getModel().equals(model)) {
+                filteredCars2.add(car);
+            }
+        }
+
+        return filteredCars2;
+    }
+    //    return Collections.emptyList();
+    //}
 }

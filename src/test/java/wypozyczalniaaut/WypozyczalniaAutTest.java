@@ -6,19 +6,19 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static wypozyczalniaaut.Car.getListOfCars;
 
 class WypozyczalniaAutTest {
 
     List listOfCars = new ArrayList<>();
     Car audia3 = new Car("TK 1", "Audi", "A3", 4, new BigDecimal("500"));
-    Car audia4 = new Car("TK 1", "Audi", "A4", 4, new BigDecimal("500"));
-    Car skodafabia = new Car("TK 2", "Skoda", "Fabia", 5, new BigDecimal("600"));
-    Car skodafelicja = new Car("TK 2", "Skoda", "Felicja", 5, new BigDecimal("600"));
+    Car audia4 = new Car("TK 2", "Audi", "A4", 4, new BigDecimal("500"));
+    Car skodafabia = new Car("TK 3", "Skoda", "Fabia", 5, new BigDecimal("600"));
+    Car skodafelicja = new Car("TK 4", "Skoda", "Felicja", 5, new BigDecimal("600"));
     @BeforeEach
     void setUp() {
         listOfCars.add(audia3);
@@ -47,11 +47,17 @@ class WypozyczalniaAutTest {
         System.out.println(listOfCars.toString());
 
         //when
-        List shouldBeListOfAudi = getListOfCars("Audi");
+
+        List<Car> shouldBeListOfAudi = getListOfCars("Audi");
+        System.out.println(shouldBeListOfAudi);
 
         //then
-        assertEquals(shouldBeListOfAudi.size(), 1);
-        assertEquals(shouldBeListOfAudi.contains(List.of(audia3, audia4)), true);
+        assertEquals(2, shouldBeListOfAudi.size());
+        assertTrue(shouldBeListOfAudi.contains(audia3));
+        assertTrue(shouldBeListOfAudi.contains(audia4));
+
+        //assertEquals(shouldBeListOfAudi.size(), 2);
+        //assertEquals(shouldBeListOfAudi.contains(List.of(audia3, audia4)), true);
 
     }
 
@@ -66,8 +72,9 @@ class WypozyczalniaAutTest {
 
         //then
         assertEquals(shouldBeListOfAudi.size(), 1);
-        assertEquals(shouldBeListOfAudi.contains(List.of(audia3)), true);
+        assertEquals(shouldBeListOfAudi.contains(audia3), true);
 
     }
+
 
 }
